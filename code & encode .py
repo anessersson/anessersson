@@ -34,31 +34,50 @@ def decrypt_url():
 root = tk.Tk()
 root.title("Base64 Encoder/Decoder")
 
+# Get screen size
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+# Set window size to 80% of screen size
+window_width = int(screen_width * 0.8)
+window_height = int(screen_height * 0.8)
+root.geometry(f"{window_width}x{window_height}")
+
 frame = ttk.Frame(root, padding="20")
-frame.grid(column=0, row=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+frame.grid(column=0, row=0, sticky=(tk.W + tk.E + tk.N + tk.S))  
 
-label = ttk.Label(frame, text="Enter URL:")
-label.grid(column=0, row=0, sticky=tk.W)
+title_label = ttk.Label(frame, text="Coded by anesboulf (anessersson)", font=("Helvetica", 20, "bold"))  
+title_label.grid(column=0, row=0, columnspan=2, sticky=(tk.W + tk.E))  
 
-entry = ttk.Entry(frame, width=40)
-entry.grid(column=1, row=0)
+label = ttk.Label(frame, text="Enter URL:", font=("Helvetica", 16))  
+label.grid(column=0, row=1, sticky=tk.E)  
 
-encode_button = ttk.Button(frame, text="Encode", command=encode_url)
-encode_button.grid(column=0, row=1)
+entry = ttk.Entry(frame, width=60, font=("Helvetica", 14))  
+entry.grid(column=1, row=1, sticky=(tk.W + tk.E))  
 
-decode_button = ttk.Button(frame, text="Decode", command=decode_url)
-decode_button.grid(column=1, row=1)
 
-encoded_entry = ttk.Entry(frame, width=40)
-encoded_entry.grid(column=1, row=2)
+style = ttk.Style()
+style.configure('Custom.TButton', font=('Helvetica', 14))
 
-copy_button = ttk.Button(frame, text="Copy Encoded URL", command=copy_encoded_url)
-copy_button.grid(column=0, row=2)
+encode_button = ttk.Button(frame, text="Encode", command=encode_url, width=20, style='Custom.TButton')  
+encode_button.grid(column=0, row=2, sticky=tk.E)  
+
+decode_button = ttk.Button(frame, text="Decode", command=decode_url, width=20, style='Custom.TButton')  
+decode_button.grid(column=1, row=2, sticky=tk.W)  
+
+encoded_entry = ttk.Entry(frame, width=60, font=("Helvetica", 14))  
+encoded_entry.grid(column=1, row=3, sticky=(tk.W + tk.E))  
+
+copy_button = ttk.Button(frame, text="Copy Encoded URL", command=copy_encoded_url, width=20, style='Custom.TButton')  
+copy_button.grid(column=0, row=3, sticky=tk.E)  
 
 output_var = tk.StringVar()
-output_label = ttk.Label(frame, textvariable=output_var, wraplength=400)
-output_label.grid(column=0, row=3, columnspan=2)
+output_label = ttk.Label(frame, textvariable=output_var, wraplength=800, font=("Helvetica", 14))  
+output_label.grid(column=0, row=4, columnspan=2, sticky=(tk.W + tk.E))  
 
 entry.bind("<Control-v>", paste_from_clipboard)
+
+root.columnconfigure(0, weight=1)  
+root.rowconfigure(0, weight=1)    
 
 root.mainloop()
