@@ -1,4 +1,5 @@
-an ethical hacker
+"for education purpuses" -sun_tzu-art of war
+
 
 <!---
 anessersson/anessersson is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
